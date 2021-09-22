@@ -45,7 +45,13 @@ def creating_role(message: TextMessage, state_session):
     return resp
 
 
-
+@robot_view.filter("角色信息")
+def get_user_info(message: TextMessage, state_session):
+    """
+    获取用户信息
+    """
+    resp = user.user_info(message, state_session)
+    return resp
 
 
 @robot_view.filter("开始修炼")
