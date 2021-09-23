@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from werobot.messages.messages import TextMessage
+
+from robot.commons.calculate_exp import get_add_exp
 from robot.models.user import User, UserProfile
 from robot.msg_reply import message_format, format_userinfo
 from robot import state
@@ -40,6 +42,9 @@ def creating_role(message: TextMessage, state_session):
             openid=source_openid,
             user_status=True
         )
+    study_exp = get_add_exp(state_session)
+    user_profile.exp = user_profile.exp + study_exp
+    user_profile.save()
     return format_userinfo(user, user_profile, state_session)
 
 
@@ -106,10 +111,14 @@ def user_info(message: TextMessage, state_session):
         openid=openid,
         user_status=True,
     )
+    study_exp = get_add_exp(state_session)
+    user_profile.exp = user_profile.exp + study_exp
+    user_profile.save()
     reply = format_userinfo(user, user_profile, state_session)
     return reply
 
 
 def get_all(message):
+    print(message.content)
     objs = User.objects.first()
     return objs.openid
