@@ -135,3 +135,5 @@ WECHAT_TOKEN = 'azhizhizhia'
 
 
 MONGODB_URL = "mongodb://game_dev:hanhangame_M123@39.106.173.79:27017/game_db"
+
+MAX_STUDY_TIME = 5 * 60

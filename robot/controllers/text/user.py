@@ -100,7 +100,7 @@ def user_info(message: TextMessage, state_session):
     try:
         user = User.objects.get()
     except User.DoesNotExist:
-        return f"请先{message_format('创建角色')}"
+        return f"请先  {message_format('创建角色')}"
     user_profile = UserProfile.objects.get(
         user_id=user.id,
         openid=openid,
@@ -108,20 +108,6 @@ def user_info(message: TextMessage, state_session):
     )
     reply = format_userinfo(user, user_profile, state_session)
     return reply
-
-
-def start_study(message: TextMessage, state_session):
-    """开始修炼"""
-    state_session["study_status"] = True
-    return "成功"
-
-
-def level_up(message: TextMessage, state_session):
-    """境界提升"""
-
-
-def body_level_up(message: TextMessage, state_session):
-    """肉身提升"""
 
 
 def get_all(message):

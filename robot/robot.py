@@ -9,6 +9,7 @@ from werobot.session.mongodbstorage import MongoDBStorage
 from mp_game.settings import WECHAT_SECRET, WECHAT_APPID, WECHAT_TOKEN, MONGODB_URL
 from robot import state
 from robot.controllers.text import user
+from robot.controllers.text import study
 
 collection = pymongo.MongoClient(MONGODB_URL)["wechat"]["session"]
 session_storage = MongoDBStorage(collection)
@@ -25,9 +26,9 @@ robot_view = WeRoBot(token=WECHAT_TOKEN, config=config)
 
 
 @robot_view.text
-def set_nickname(message, session):
+def state_handler(message, session):
     """
-    设置昵称
+    关于state不同状态的处理
     """
     user_state = session.get("state")
     if user_state == state.SET_NICKNAME:
@@ -56,19 +57,19 @@ def get_user_info(message: TextMessage, state_session):
 
 @robot_view.filter("开始修炼")
 def start_study(message: TextMessage, state_session):
-    resp = user.start_study(message, state_session)
+    resp = study.start_study(message, state_session)
     return resp
 
 
 @robot_view.filter("境界提升")
 def level_up(message: TextMessage, state_session):
-    resp = user.level_up(message, state_session)
+    resp = study.level_up(message, state_session)
     return resp
 
 
 @robot_view.filter("肉身提升")
 def body_level_up(message: TextMessage, state_session):
-    resp = user.body_level_up(message, state_session)
+    resp = study.body_level_up(message, state_session)
     return resp
 
 
