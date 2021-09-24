@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-状态映射表
+状态
 """
 
 SET_NICKNAME = 0  # 设置昵称

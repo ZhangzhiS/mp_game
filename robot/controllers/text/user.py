@@ -95,6 +95,8 @@ def set_gender(message: TextMessage, state_session):
         user_id=user.id,
         openid=openid,
     )
+    user_profile = UserProfile.objects.get(user_id=user.id, openid=openid)
+    state_session["exp_add"] = user_profile.exp_add
     state_session["state"] = None
     return reply
 

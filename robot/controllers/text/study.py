@@ -23,7 +23,7 @@ def start_study(message: TextMessage, state_session):
 达到{forever_level}开启无尽修炼模式"""
     state_session["start_time"] = time_step
     state_session["study_status"] = True
-    return "仙路漫漫，修仙路上充满机遇以及危险，请努力提升自己！"
+    return "开始修炼！仙路漫漫，修仙路上充满机遇以及危险，请努力提升自己！"
 
 
 def level_up(message: TextMessage, state_session):
