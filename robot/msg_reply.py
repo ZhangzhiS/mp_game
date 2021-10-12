@@ -16,7 +16,8 @@ def format_userinfo(user: User, user_profile: UserProfile, session):
     add_exp = session.get('add_exp')
     study_tag = f"无尽修炼中:每5秒增长的经验为{add_exp}" if forever_study else "修炼中"
     return f"""[ {user.nickname} ] | [ 性别：{'男' if user.gender == 1 else '女'} ]
-[ 总修为：{user_profile.exp} ] | [ 修炼速度：{user_profile.exp_add}/每10秒 ]
+修为：{user_profile.exp}
+修炼速度：{user_profile.exp_add}/每10秒
 {study_tag if study_status else message_format("开始修炼", "修炼")+"  "+emoji.emojize(":red_heart:")*3}
      当前境界       | 升级需求
 境界：{user_profile.level_label} | {100000} | {message_format("境界提升", "升级")}
