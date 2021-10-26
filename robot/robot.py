@@ -36,37 +36,16 @@ def state_handler(message, session):
     res = session_ctrl.session_options(message, session)
     if res:
         return res
-    #
-    # user_state = session.get("state")
-    # openid = session.get("openid")
-    # if not openid:
-    #     openid = message.source
-    #     user_obj, user_profile_obj = get_user_obj(openid)
-    #     if not user_obj:
-    #         if message.content == "创建角色":
-    #             return user.creating_role(message, session)
-    #         return f"请先{message_format('创建角色')}"
-    #     session["openid"] = openid
-    # if user_state == state.SET_NICKNAME:
-    #     return user.set_nickname(message, session)
-    # elif user_state == state.SET_GENDER:
-    #     return user.set_gender(message, session)
 
 
 @robot_view.filter("创建角色")
 def creating_role(message: TextMessage, state_session):
-    """
-    创建角色
-    """
     resp = user.creating_role(message, state_session)
     return resp
 
 
 @robot_view.filter("角色信息")
 def get_user_info(message: TextMessage, state_session):
-    """
-    获取用户信息
-    """
     resp = user.user_info(message, state_session)
     return resp
 

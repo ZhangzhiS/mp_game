@@ -13,7 +13,6 @@ from robot import state
 def creating_role(message: TextMessage, state_session):
     """
     创建角色
-    :return:
     """
     source_openid = message.source
     user = User.objects.get_or_create(openid=source_openid)
