@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import random
+
 from werobot.messages.messages import TextMessage
 
 from robot.commons.calculate_exp import get_add_exp
@@ -25,6 +27,7 @@ def creating_role(message: TextMessage, state_session):
 请回复您的角色昵称(2-8个字符)
 """
         state_session["state"] = state.SET_NICKNAME
+        state_session["openid"] = source_openid
         return reply
     try:
         user_profile = UserProfile.objects.get(
@@ -82,18 +85,20 @@ def set_gender(message: TextMessage, state_session):
         return f"请先{message_format('创建角色')}"
     user.gender = gender
     user.save()
+    random_gem = random.randint(1000, 2000)
     reply = f"""
 色创建成功，欢迎 {message_format(user.nickname)}
-新手指引：
-1.
-2. 
-3. 
-4.
+我从凡间来，今朝入仙籍。
+仙人抚我顶，结发受长生。
+看着手中的灵石袋，目送那个缥缈的背影登天而去。
+通知：
+    仙师给你留下了{random_gem}块灵石！
 {message_format("开始修炼")}
 """
     UserProfile.objects.create(
-        user_id=user.id,
+        user_id=user,
         openid=openid,
+        gem=random_gem
     )
     user_profile = UserProfile.objects.get(user_id=user.id, openid=openid)
     state_session["exp_add"] = user_profile.exp_add
