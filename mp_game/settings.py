@@ -75,14 +75,6 @@ WSGI_APPLICATION = 'mp_game.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': "mp_game",
-    #     "HOST": "rm-2zekec9o69t5j4ya02o.mysql.rds.aliyuncs.com",
-    #     "USER": "mp_game",
-    #     "PORT": "3306",
-    #     "PASSWORD": "j3pUyx&8pZ%jgW&"
-    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'mp_game',
