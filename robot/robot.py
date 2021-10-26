@@ -9,6 +9,7 @@ from werobot.session.mongodbstorage import MongoDBStorage
 from mp_game.settings import WECHAT_SECRET, WECHAT_APPID, WECHAT_TOKEN, MONGODB_URL
 from robot import state
 from robot.commons.user_common import get_user_obj
+from robot.controllers import session_ctrl
 from robot.controllers.text import user
 from robot.controllers.text import study
 from robot.msg_reply import message_format
@@ -32,20 +33,24 @@ def state_handler(message, session):
     """
     关于state不同状态的处理
     """
-    user_state = session.get("state")
-    openid = session.get("openid")
-    if not openid:
-        openid = message.source
-        user_obj, user_profile_obj = get_user_obj(openid)
-        if not user_obj:
-            if message.content == "创建角色":
-                return user.creating_role(message, session)
-            return f"请先{message_format('创建角色')}"
-        session["openid"] = openid
-    if user_state == state.SET_NICKNAME:
-        return user.set_nickname(message, session)
-    elif user_state == state.SET_GENDER:
-        return user.set_gender(message, session)
+    res = session_ctrl.session_options(message, session)
+    if res:
+        return res
+    #
+    # user_state = session.get("state")
+    # openid = session.get("openid")
+    # if not openid:
+    #     openid = message.source
+    #     user_obj, user_profile_obj = get_user_obj(openid)
+    #     if not user_obj:
+    #         if message.content == "创建角色":
+    #             return user.creating_role(message, session)
+    #         return f"请先{message_format('创建角色')}"
+    #     session["openid"] = openid
+    # if user_state == state.SET_NICKNAME:
+    #     return user.set_nickname(message, session)
+    # elif user_state == state.SET_GENDER:
+    #     return user.set_gender(message, session)
 
 
 @robot_view.filter("创建角色")
