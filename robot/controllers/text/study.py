@@ -47,7 +47,7 @@ def level_up(message: TextMessage, state_session):
     user_profile.level = next_level.level
     user_profile.level_label = next_level.level_label
     user_profile.exp_add += next_level.exp_ampl
-    user_profile.next_level_exp = random.randint(next_level.consume_exp_range[0], next_level.consume_exp_range[1])
+    user_profile.next_level_exp = random.randint(next_level.consume_exp_range.lower, next_level.consume_exp_range.upper)
     user_profile.save()
     state_session["exp_add"] = user_profile.exp_add
     state_session["next_level_limit"] = user_profile.next_level_exp
@@ -70,7 +70,7 @@ def body_level_up(message: TextMessage, state_session):
     user_profile.level = next_level.level
     user_profile.level_label = next_level.level_label
     user_profile.exp_add += next_level.exp_ampl
-    user_profile.next_body_level_exp = random.randint(next_level.consume_exp_range[0], next_level.consume_exp_range[1])
+    user_profile.next_body_level_exp = random.randint(next_level.consume_exp_range.lower, next_level.consume_exp_range.upper)
     user_profile.save()
     state_session["exp_add"] = user_profile.exp_add
     state_session["next_level_limit"] = user_profile.next_level_exp
