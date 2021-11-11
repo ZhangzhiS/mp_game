@@ -39,7 +39,7 @@ def level_up(message: TextMessage, state_session):
     user_level = user_profile.level
     user_exp = user_profile.exp
     next_level = LevelConfig.objects.get(last_level=user_level)
-    if user_exp < next_level.next_level_exp:
+    if user_exp < user_profile.next_level_exp:
         return "当前经验不够哦，请继续努力修炼"
     if next_level.body_level_limit > user_profile.body_level:
         return "肉身等级不足，请先提升肉身"
@@ -62,7 +62,7 @@ def body_level_up(message: TextMessage, state_session):
     user_level = user_profile.level
     user_exp = user_profile.exp
     next_level = BodyLevelConfig.objects.get(last_level=user_level)
-    if user_exp < next_level.next_body_level_exp:
+    if user_exp < user_profile.next_body_level_exp:
         return "当前经验不够哦，请继续努力修炼"
     if next_level.exp_level_limit > user_profile.level:
         return "境界不足，请先提升境界"
