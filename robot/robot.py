@@ -7,12 +7,9 @@ from werobot.messages.messages import TextMessage
 from werobot.session.mongodbstorage import MongoDBStorage
 
 from mp_game.settings import WECHAT_SECRET, WECHAT_APPID, WECHAT_TOKEN, MONGODB_URL
-from robot import state
-from robot.commons.user_common import get_user_obj
 from robot.controllers import session_ctrl
 from robot.controllers.text import user
 from robot.controllers.text import study
-from robot.msg_reply import message_format
 
 collection = pymongo.MongoClient(MONGODB_URL)["wechat"]["session"]
 session_storage = MongoDBStorage(collection)

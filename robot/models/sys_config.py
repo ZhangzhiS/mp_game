@@ -21,7 +21,7 @@ class LevelConfig(BaseModel):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.level_label
+        return f"{self.level},{self.level_label},{self.consume_exp_range}"
 
 
 class BodyLevelConfig(BaseModel):

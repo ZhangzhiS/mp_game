@@ -3,6 +3,7 @@
 import random
 
 from django.core.management import BaseCommand
+from robot.models.sys_config import LevelConfig
 
 
 class Command(BaseCommand):
@@ -32,7 +33,14 @@ class Command(BaseCommand):
                 ]
                 for level_lab in level_list:
                     exp = tmp_exp * 2
-                    print(i+level_lab, exp)
                     t += exp
                     tmp_exp = exp
-        print("总", t)
+                    lc = LevelConfig(
+                        level=level_num,
+                        level_label=i+level_lab,
+                        consume_exp_range=(exp, exp + 10),
+                        last_level=level_num-1
+                    )
+                    print(lc)
+                    lc.save()
+                    level_num += 1

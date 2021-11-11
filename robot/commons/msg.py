@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from typing import List
 from urllib.parse import urlencode
 
-from robot.models import MapModel
-from robot.models.user import User, UserProfile
 import emoji
 
 
@@ -18,7 +15,7 @@ def message_format(text, show_text=None, msgmenuid=2):
     return f'<a href="{url}">{show_text or text}</a>'
 
 
-def format_userinfo(user: User, user_profile: UserProfile, session):
+def format_userinfo(user, user_profile, session):
     """格式化返回用户信息"""
     study_status = session.get('study_status', False)
     forever_study = session.get('forever_study', False)
@@ -43,44 +40,6 @@ def format_userinfo(user: User, user_profile: UserProfile, session):
 {message_format('角色')}|{message_format("技能")}|{message_format('物品')}|{message_format("探险")}|{"修炼中" if study_status else message_format("开始修炼", "修炼")+"  "+emoji.emojize(":red_heart:")*3}
 ------------------------
 """
-
-
-"""
-# ------------------------
-# 属性：
-# 生命值:{user_profile.health_point}/{user_profile.max_health_point}
-# 法力值:{user_profile.mana_point}/{user_profile.max_mana_point}
-# 力量:{user_profile.strength}    敏捷:{user_profile.dexterity}
-# 智力:{user_profile.intelligence}    体力:{user_profile.intelligence}
-# 护甲:{user_profile.armor}
-# {message_format("详细属性")}
-------------------------
-装备：
-------------------------
-功能：
-{message_format('角色')}|{message_format("技能")}|{message_format('物品')}|{message_format("探险")}|{"修炼中" if study_status else message_format("开始修炼", "修炼")+"  "+emoji.emojize(":red_heart:")*3}
-------------------------
-"""
-
-
-def format_maps(maps: List[MapModel]):
-
-    def gen_msg(t_m: List[str]):
-        m = ""
-        for it in t_m:
-            m = m + message_format(text=f"探索-{it}", show_text=it) + "    "
-        m += "\n"
-        return m
-
-    res = """"""
-    tmp_map = []
-    for map_obj in maps:
-        if len(tmp_map) == 3:
-            res += gen_msg(tmp_map)
-            tmp_map = []
-        tmp_map.append(map_obj.name)
-    res += gen_msg(tmp_map)
-    return res
 
 
 if __name__ == '__main__':
