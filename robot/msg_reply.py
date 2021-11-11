@@ -40,7 +40,7 @@ def format_userinfo(user: User, user_profile: UserProfile, session):
     {message_format("肉身提升", "升级")}
 ------------------------
 功能：
-{message_format('角色')}|{message_format("技能")}|{message_format('物品')}|{message_format("探险")}|{"修炼中" if study_status else message_format("开始修炼", "修炼")+"  "+emoji.emojize(":red_heart:")*3}
+{message_format('角色')}|{message_format('物品')}|{message_format("探险")}|{"修炼中" if study_status else message_format("开始修炼", "修炼")+"  "+emoji.emojize(":red_heart:")*3}
 ------------------------
 """
 
