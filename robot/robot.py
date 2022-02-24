@@ -1,18 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import pymongo
+import psycopg2
 from werobot import WeRoBot
 from werobot.config import Config
 from werobot.messages.messages import TextMessage
-from werobot.session.mongodbstorage import MongoDBStorage
+from werobot.session.postgresqlstorage import PostgreSQLStorage
 
 from mp_game.settings import WECHAT_SECRET, WECHAT_APPID, WECHAT_TOKEN, MONGODB_URL
 from robot.controllers import session_ctrl
 from robot.controllers.text import user
 from robot.controllers.text import study
 
-collection = pymongo.MongoClient(MONGODB_URL)["wechat"]["session"]
-session_storage = MongoDBStorage(collection)
+
+conn = psycopg2.connect(host='127.0.0.1', port='5432', dbname='mp_game', user='mp_game', password='hsNABfdeL8b3')
+session_storage = PostgreSQLStorage(conn)
 
 
 config = Config(

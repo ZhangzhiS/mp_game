@@ -27,17 +27,17 @@ def format_userinfo(user: User, user_profile: UserProfile, session):
     return f"""[ {user.nickname} ] | [ 性别：{'男' if user.gender == 1 else '女'} ]
 修为：{user_profile.exp}
 修炼速度：{user_profile.exp_add}/每10秒
-{study_tag if study_status else message_format("开始修炼", "修炼")+"  "+emoji.emojize(":red_heart:")*3}
+{study_tag if study_status else message_format("开始修炼", "开始修炼")+"  "+emoji.emojize(":red_heart:")*3}
 ------------------------
 修为：
     当前境界:{user_profile.level_label}
     升级需求:{user_profile.next_level_exp}
-    {message_format("境界提升", "升级")}
+    {message_format("境界提升", "境界提升")}
 ------------------------
 肉身：
     当前境界:{user_profile.body_level_label}
     升级需求:{user_profile.next_body_level_exp}
-    {message_format("肉身提升", "升级")}
+    {message_format("肉身提升", "境界提升")}
 ------------------------
 功能：
 {message_format('角色')}|{message_format('物品')}|{message_format("探险")}|{"修炼中" if study_status else message_format("开始修炼", "修炼")+"  "+emoji.emojize(":red_heart:")*3}

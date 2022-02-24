@@ -1,0 +1,55 @@
+[
+  {
+    "code": "mujian",
+    "name": "木剑",
+    "detail": "一把木剑"
+  },
+  {
+    "code": "tiejian",
+    "name": "铁剑",
+    "detail": "用铁矿铸成的剑"
+  },
+  {
+    "code": "qingtongjian",
+    "name": "青铜剑",
+    "detail": "用铜和锡铸成的剑"
+  },
+  {
+    "code": "jinggangjian",
+    "name": "精钢剑",
+    "detail": "用精钢铸成的剑"
+  },
+  {
+    "code": "xuantiejian",
+    "name": "玄铁剑",
+    "detail": "用玄铁铸成的剑"
+  },
+  {
+    "code": "hantiejian",
+    "name": "寒铁剑",
+    "detail": "用寒铁铸成的剑"
+  },
+  {
+    "code": "xuantiezhongjian",
+    "name": "玄铁重剑",
+    "detail": "重型玄铁剑，伤害更高"
+  },
+  {
+    "code": "xiamingjian",
+    "name": "夏螟剑",
+    "detail": "铸剑大师铸造的剑，灵力充沛，收于匣中似有虫鸣"
+  },
+  {
+    "code": "zhenshanjian",
+    "name": "镇山剑",
+    "detail": "后主禅，延熙二年，造一大剑，长一丈二尺。镇剑口山，往往人见光辉，后人求之不获。"
+  },
+  {
+    "code": "feijingjian",
+    "name": "飞景剑",
+    "detail": "魏太子丕选兹良金，命彼国工，精而炼之，至于百辟，以为三剑：一曰飞景，二曰流采，三曰华铤。"
+  },
+  {
+    "code": ""
+  }
+]
