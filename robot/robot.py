@@ -6,13 +6,13 @@ from werobot.config import Config
 from werobot.messages.messages import TextMessage
 from werobot.session.postgresqlstorage import PostgreSQLStorage
 
-from mp_game.settings import WECHAT_SECRET, WECHAT_APPID, WECHAT_TOKEN, MONGODB_URL
+from mp_game.settings import WECHAT_SECRET, WECHAT_APPID, WECHAT_TOKEN
 from robot.controllers import session_ctrl
 from robot.controllers.text import user
 from robot.controllers.text import study
 
 
-conn = psycopg2.connect(host='127.0.0.1', port='5432', dbname='mp_game', user='mp_game', password='hsNABfdeL8b3')
+conn = psycopg2.connect(host='127.0.0.1', port='5432', database='mp_game', user='mp_game', password='hsNABfdeL8b3')
 session_storage = PostgreSQLStorage(conn)
 
 
