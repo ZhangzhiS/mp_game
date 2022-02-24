@@ -12,7 +12,7 @@ from robot.controllers.text import user
 from robot.controllers.text import study
 
 
-conn = psycopg2.connect(host='127.0.0.1', port='5432', database='mp_game', user='mp_game', password='hsNABfdeL8b3')
+conn = psycopg2.connect(host='42.193.105.229', port='5432', database='mp_game', user='mp_game', password='hsNABfdeL8b3')
 session_storage = PostgreSQLStorage(conn)
 
 
