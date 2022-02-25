@@ -66,7 +66,7 @@ def format_userinfo(user: User, user_profile: UserProfile, session):
 def format_maps(maps: List[MapModel]):
 
     def gen_msg(t_m: List[str]):
-        m = ""
+        m = "地图列表：\n"
         for it in t_m:
             m = m + message_format(text=f"探索-{it}", show_text=it) + "    "
         m += "\n"
