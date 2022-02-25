@@ -32,6 +32,7 @@ class MapModel(BaseModel):
     ]
     name = models.CharField(max_length=255, verbose_name="名字")
     consume_gem = models.IntegerField(verbose_name="消耗灵石")
+    consume_time = models.IntegerField(verbose_name="探索消耗的时间，单位（秒）", default=1)
 
     class Meta:
         verbose_name = "地图"

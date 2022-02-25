@@ -10,6 +10,7 @@ from mp_game.settings import WECHAT_SECRET, WECHAT_APPID, WECHAT_TOKEN
 from robot.controllers import session_ctrl
 from robot.controllers.text import user
 from robot.controllers.text import study
+from robot.controllers.text import explore
 
 db = redis.Redis()
 session_storage = RedisStorage(db, prefix="mp_game")
@@ -62,6 +63,12 @@ def level_up(message: TextMessage, state_session):
 @robot_view.filter("肉身提升")
 def body_level_up(message: TextMessage, state_session):
     resp = study.body_level_up(message, state_session)
+    return resp
+
+
+@robot_view.filter("探索")
+def explore_route(_: TextMessage, state_session):
+    resp = explore.get_maps(state_session)
     return resp
 
 
