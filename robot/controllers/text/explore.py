@@ -24,7 +24,7 @@ def auto_fighting(user_profile: models.UserProfile, all_monsters: List[models.Mo
     pass
 
 
-def get_maps(state_session):
+def get_maps(message: TextMessage, state_session):
     """"""
     maps = models.MapModel.objects.all()
     res = format_maps(maps)
@@ -57,6 +57,7 @@ def do_explore(message: TextMessage, state_session):
 请选择正确的探索地图
 {format_maps(maps)}
 """
+    # TODO 校验拥有的灵石是否足够去探索，并减少相应的灵石
     end_time = time_f(map_obj.consume_time)
     state_session["explore_start"] = int(time.time())
     state_session["explore_map"] = map_obj.id

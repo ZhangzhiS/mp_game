@@ -66,13 +66,13 @@ def format_userinfo(user: User, user_profile: UserProfile, session):
 def format_maps(maps: List[MapModel]):
 
     def gen_msg(t_m: List[str]):
-        m = "地图列表：\n"
+        m = ""
         for it in t_m:
             m = m + message_format(text=f"探索-{it}", show_text=it) + "    "
         m += "\n"
         return m
 
-    res = """"""
+    res = "可探索地图列表：\n"
     tmp_map = []
     for map_obj in maps:
         if len(tmp_map) == 3:
