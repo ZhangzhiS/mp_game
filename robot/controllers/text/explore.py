@@ -36,7 +36,6 @@ def get_maps(state_session):
     if end_time < now:
         res += f"""------------------------\n提示：\n正在探索中，预计{end_time}结束 """
         return res
-
     return res
 
 

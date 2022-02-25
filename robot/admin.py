@@ -16,6 +16,11 @@ class PlayerAdmin(admin.ModelAdmin):
     pass
 
 
+class MapAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(models.LevelConfig, LevelConfigAdmin)
 admin.site.register(models.BodyLevelConfig, BodyLevelConfigAdmin)
 admin.site.register(models.UserProfile, PlayerAdmin)
+admin.site.register(models.MapModel, MapAdmin)
