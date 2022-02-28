@@ -53,8 +53,7 @@ def get_map_detail(message, state_session):
         map_obj = models.MapModel.objects.get(name=map_name)
     except models.MapModel.DoesNotExist:
         maps = models.MapModel.objects.all()
-        return f"""
-请选择正确的探索地图
+        return f"""请选择正确的探索地图
 {format_maps(maps)}
 """
     map_monsters = map_obj.mapmonster_set.filter(status=True)
@@ -70,8 +69,7 @@ def do_explore(message: TextMessage, state_session):
         map_obj = models.MapModel.objects.get(name=map_name)
     except models.MapModel.DoesNotExist:
         maps = models.MapModel.objects.all()
-        return f"""
-请选择正确的探索地图
+        return f"""请选择正确的探索地图
 {format_maps(maps, "探索地图")}
 """
     # TODO 校验拥有的灵石是否足够去探索，并减少相应的灵石

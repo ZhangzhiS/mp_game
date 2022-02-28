@@ -85,9 +85,8 @@ def format_maps(maps: List[MapModel], operation="选择地图"):
 
 
 def format_map_detail(map: MapModel, monsters: List[MapMonster]):
-    res =  f"""
-地图：{map.name}
-{map.desc if map.desc else ''}
+    res =  f"""地图：{map.name}
+{map.desc if map.desc else None}
 耗时：{map.consume_time}秒
 """
     if monsters:
