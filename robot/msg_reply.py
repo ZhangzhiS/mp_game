@@ -97,6 +97,7 @@ def format_map_detail(map: MapModel, monsters: List[str], awards: List[str]):
         res += "奖励：\n"
         res += "、".join(awards)
         res += "\n"
+    res += message_format(f"开始探索-{map.name}","开始探索")
     return res
 
 
