@@ -6,14 +6,16 @@ import time
 from typing import List
 
 from werobot.messages.messages import TextMessage
+import redis
 
 from robot import models
 from robot.commons.user_common import get_user_obj
 from robot.msg_reply import format_map_detail, format_maps
 
+db = redis.Redis()
+
 
 def gen_monster(monster_objs: List[models.MapMonster]):
-    """"""
     res = []
     for monster_config in monster_objs:
         count = random.randint(monster_config.count[0], monster_config.count[1])
@@ -26,7 +28,6 @@ def auto_fighting(user_profile: models.UserProfile, all_monsters: List[models.Mo
 
 
 def get_maps(message: TextMessage, state_session):
-    """"""
     maps = models.MapModel.objects.all()
     res = format_maps(maps)
     explore_status = state_session.get("explore_status", 0)
@@ -46,6 +47,18 @@ def time_f(need_time):
     return end_time.strftime("%Y-%m-%d %H:%M:%S")
 
 
+def build_map_detail(map):
+    map_monsters = map.mapmonster_set.filter(status=True)
+    monsters_name = [i.name for i in map_monsters]
+    award = ["灵石"]
+    for monster in map_monsters:
+        eqs = monster.monster_id.award_eq.all()
+        eq_names = [i.name for i in eqs]
+        award.extend(eq_names)
+    res = format_map_detail(map, monsters_name, award)
+    return res
+
+
 def get_map_detail(message, state_session):
     select_map = message.content
     map_name = select_map.split("-")[1]
@@ -56,9 +69,11 @@ def get_map_detail(message, state_session):
         return f"""请选择正确的探索地图
 {format_maps(maps)}
 """
-    map_monsters = map_obj.mapmonster_set.filter(status=True)
-    res = format_map_detail(map_obj, map_monsters)
-    return res
+    map_detail = db.get(map_name)
+    if not map_detail:
+        map_detail = build_map_detail(map_obj)
+        db.set(map_name, map_detail)
+    return map_detail
 
 
 def do_explore(message: TextMessage, state_session):

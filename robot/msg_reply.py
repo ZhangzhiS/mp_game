@@ -84,15 +84,19 @@ def format_maps(maps: List[MapModel], operation="选择地图"):
     return res
 
 
-def format_map_detail(map: MapModel, monsters: List[MapMonster]):
+def format_map_detail(map: MapModel, monsters: List[str], awards: List[str]):
     res =  f"""地图：{map.name}
-{map.desc if map.desc else None}
+{map.desc if map.desc else ""}
 耗时：{map.consume_time}秒
 """
     if monsters:
         res += "怪物：\n"
-    for monster in monsters:
-        res += f"{monster.monster_id.name}\n"
+        res += "、".join(monsters)
+        res += "\n"
+    if awards:
+        res += "奖励：\n"
+        res += "、".join(awards)
+        res += "\n"
     return res
 
 
