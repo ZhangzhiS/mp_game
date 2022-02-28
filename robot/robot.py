@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import re
 import redis
 from werobot import WeRoBot
 from werobot.config import Config
@@ -67,8 +68,20 @@ def body_level_up(message: TextMessage, state_session):
 
 
 @robot_view.filter("探索")
-def explore_route(_: TextMessage, state_session):
-    resp = explore.get_maps(state_session)
+def explore_route(message: TextMessage, state_session):
+    resp = explore.get_maps(message, state_session)
+    return resp
+
+
+@robot_view.filter(re.compile(r"选择地图-.*?"))
+def explore_select_map(message: TextMessage, state_session):
+    resp = explore.get_map_detail(message, state_session)
+    return resp
+
+
+@robot_view.filter(re.compile(r"探索地图-.*?"))
+def explore_map(message: TextMessage, state_session):
+    resp = explore.do_explore(message, state_session)
     return resp
 
 
@@ -80,10 +93,4 @@ def get_all(message: TextMessage):
     :return:
     """
     resp = user.get_all(message)
-    return resp
-
-
-@robot_view.filter("探索")
-def get_all_map(message: TextMessage):
-    resp = 1
     return resp

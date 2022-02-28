@@ -4,6 +4,7 @@ from typing import List
 from urllib.parse import urlencode
 
 from robot.models import MapModel
+from robot.models.explore import MapMonster
 from robot.models.user import User, UserProfile
 import emoji
 
@@ -63,12 +64,12 @@ def format_userinfo(user: User, user_profile: UserProfile, session):
 """
 
 
-def format_maps(maps: List[MapModel]):
+def format_maps(maps: List[MapModel], operation="选择地图"):
 
     def gen_msg(t_m: List[str]):
         m = ""
         for it in t_m:
-            m = m + message_format(text=f"探索-{it}", show_text=it) + "    "
+            m = m + message_format(text=f"{operation}-{it}", show_text=it) + "    "
         m += "\n"
         return m
 
@@ -80,6 +81,19 @@ def format_maps(maps: List[MapModel]):
             tmp_map = []
         tmp_map.append(map_obj.name)
     res += gen_msg(tmp_map)
+    return res
+
+
+def format_map_detail(map: MapModel, monsters: List[MapMonster]):
+    res =  f"""
+地图：{map.name}
+{map.desc if map.desc else ''}
+耗时：{map.consume_time}秒
+"""
+    if monsters:
+        res += "怪物：\n"
+    for monster in monsters:
+        res += f"{monster.monster_id.name}\n"
     return res
 
 

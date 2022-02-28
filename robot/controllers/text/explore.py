@@ -8,7 +8,8 @@ from typing import List
 from werobot.messages.messages import TextMessage
 
 from robot import models
-from robot.msg_reply import format_maps
+from robot.commons.user_common import get_user_obj
+from robot.msg_reply import format_map_detail, format_maps
 
 
 def gen_monster(monster_objs: List[models.MapMonster]):
@@ -45,6 +46,22 @@ def time_f(need_time):
     return end_time.strftime("%Y-%m-%d %H:%M:%S")
 
 
+def get_map_detail(message, state_session):
+    select_map = message.content
+    map_name = select_map.split("-")[1]
+    try:
+        map_obj = models.MapModel.objects.get(name=map_name)
+    except models.MapModel.DoesNotExist:
+        maps = models.MapModel.objects.all()
+        return f"""
+请选择正确的探索地图
+{format_maps(maps)}
+"""
+    map_monsters = map_obj.mapmonster_set.filter(status=True)
+    res = format_map_detail(map_obj, map_monsters)
+    return res
+
+
 def do_explore(message: TextMessage, state_session):
     """选择地图进行探索"""
     explore_map = message.content
@@ -55,9 +72,14 @@ def do_explore(message: TextMessage, state_session):
         maps = models.MapModel.objects.all()
         return f"""
 请选择正确的探索地图
-{format_maps(maps)}
+{format_maps(maps, "探索地图")}
 """
     # TODO 校验拥有的灵石是否足够去探索，并减少相应的灵石
+    if map_obj.consume_gem:
+        openid = message.source
+        _, user_info = get_user_obj(openid)
+        if user_info.gem < map_obj.consume_gem:
+            return "灵石数量不够，无法进行探索当前选择的地图"
     end_time = time_f(map_obj.consume_time)
     state_session["explore_start"] = int(time.time())
     state_session["explore_map"] = map_obj.id
