@@ -55,7 +55,6 @@ def build_map_detail(map):
         eqs = monster.monster_id.award_eq.all()
         eq_names = [i.name for i in eqs]
         award.extend(eq_names)
-    print(monsters_name, award)
     res = format_map_detail(map, monsters_name, award)
     return res
 
@@ -94,6 +93,8 @@ def do_explore(message: TextMessage, state_session):
         _, user_info = get_user_obj(openid)
         if user_info.gem < map_obj.consume_gem:
             return "灵石数量不够，无法进行探索当前选择的地图"
+        user_info.gem -= map_obj.consume_gem
+        user_info.save()
     end_time = time_f(map_obj.consume_time)
     state_session["explore_start"] = int(time.time())
     state_session["explore_map"] = map_obj.id
