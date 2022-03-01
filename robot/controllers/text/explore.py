@@ -49,7 +49,7 @@ def time_f(need_time):
 
 def build_map_detail(map):
     map_monsters = map.mapmonster_set.filter(status=True)
-    monsters_name = [i.name for i in map_monsters]
+    monsters_name = [i.monster_id.name for i in map_monsters]
     award = ["灵石"]
     for monster in map_monsters:
         eqs = monster.monster_id.award_eq.all()
