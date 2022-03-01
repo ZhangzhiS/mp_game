@@ -23,8 +23,9 @@ def gen_monster(monster_objs: List[models.MapMonster]):
     return res
 
 
-def auto_fighting(user_profile: models.UserProfile, all_monsters: List[models.MonsterConfig]):
-    pass
+def auto_fighting(openid, map_id):
+    map = models.MapModel.objects.get(id=map_id)
+    _, user_info = get_user_obj(openid)
 
 
 def get_maps(message: TextMessage, state_session):
