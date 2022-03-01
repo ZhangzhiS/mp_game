@@ -55,6 +55,7 @@ def build_map_detail(map):
         eqs = monster.monster_id.award_eq.all()
         eq_names = [i.name for i in eqs]
         award.extend(eq_names)
+    print(monsters_name, award)
     res = format_map_detail(map, monsters_name, award)
     return res
 

@@ -56,6 +56,10 @@ class MapMonster(BaseModel):
     count = IntegerRangeField(verbose_name="存在怪物的数量")
     status = models.BooleanField(default=True, verbose_name="是否有效配置")
 
+    class Meta:
+        verbose_name = "地图怪物配置"
+        verbose_name_plural = verbose_name
+
     def to_dict(self, exclude=None):
         return {
             "monster_id": self.monster_id.id,
