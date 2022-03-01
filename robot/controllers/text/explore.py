@@ -26,6 +26,18 @@ def gen_monster(monster_objs: List[models.MapMonster]):
 def auto_fighting(openid, map_id):
     map = models.MapModel.objects.get(id=map_id)
     _, user_info = get_user_obj(openid)
+    map_monsters = map.mapmonster_set.filter(status=True)
+    award_eq = []
+    count_gem = 0
+    for monster in map_monsters:
+        count = random.randint(monster.count[0], monster.count[1])
+        award_gem = random.randint(monster.monster_id.award_gem[0], monster.monster_id.award_gem[1])
+        count_gem += count * award_gem
+        eqs = monster.monster_id.award_eq.all()
+        for c in range(count):
+            award_eq.append(random.choice(eqs))
+    res_eq = random.choices(award_eq, k=(len(award_eq)//4))
+    # TODO 统计装备，并计入用户背包
 
 
 def get_maps(message: TextMessage, state_session):
@@ -92,6 +104,8 @@ def do_explore(message: TextMessage, state_session):
     if map_obj.consume_gem:
         openid = message.source
         _, user_info = get_user_obj(openid)
+        if user_info.level < map_obj.limit_level:
+            return "当前境界不够，探索比较危险，请提升境界之后再来进行探索吧！"
         if user_info.gem < map_obj.consume_gem:
             return "灵石数量不够，无法进行探索当前选择的地图"
         user_info.gem -= map_obj.consume_gem
