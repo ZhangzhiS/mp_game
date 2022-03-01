@@ -53,7 +53,7 @@ class MapMonster(BaseModel):
         verbose_name="怪物",
         null=True
     )
-    count = IntegerRangeField(verbose_name="存在怪物的数量", default=(1, 10))
+    count = IntegerRangeField(verbose_name="存在怪物的数量")
     status = models.BooleanField(default=True, verbose_name="是否有效配置")
 
     def to_dict(self, exclude=None):
