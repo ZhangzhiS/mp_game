@@ -35,7 +35,7 @@ def get_maps(message: TextMessage, state_session):
         return res
     end_time = state_session.get("explore_end_time")
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    if end_time < now:
+    if end_time > now:
         res += f"""------------------------\n提示：\n正在探索中，预计{end_time}结束 """
         return res
     return res
