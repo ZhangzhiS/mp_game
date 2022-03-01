@@ -28,9 +28,14 @@ class MonsterAdmin(admin.ModelAdmin):
     pass
 
 
+class EqAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(models.LevelConfig, LevelConfigAdmin)
 admin.site.register(models.BodyLevelConfig, BodyLevelConfigAdmin)
 admin.site.register(models.UserProfile, PlayerAdmin)
 admin.site.register(models.MapModel, MapAdmin)
 admin.site.register(models.MonsterConfig, MonsterAdmin)
 admin.site.register(models.MapMonster, MapMonsterAdmin)
+admin.site.register(models.EqModel, EqAdmin)
