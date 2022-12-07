@@ -12,6 +12,7 @@ from robot.controllers import session_ctrl
 from robot.controllers.text import user
 from robot.controllers.text import study
 from robot.controllers.text import explore
+from robot.commons.chat import gen_res
 
 db = redis.Redis()
 session_storage = RedisStorage(db, prefix="mp_game")
@@ -32,6 +33,8 @@ def state_handler(message, session):
     """
     关于state不同状态的处理
     """
+    res = gen_res(message.content)
+    return res
     res = session_ctrl.session_options(message, session)
     if res:
         return res
