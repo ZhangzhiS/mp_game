@@ -33,6 +33,7 @@ def state_handler(message, session):
     """
     关于state不同状态的处理
     """
+    print(message.content)
     res = gen_res(message.content)
     return res
     res = session_ctrl.session_options(message, session)
